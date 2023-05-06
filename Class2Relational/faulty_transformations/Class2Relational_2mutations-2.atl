@@ -48,7 +48,6 @@ rule Package2Schema {
    )
   )
 }
-
 rule Class2Table {
  from
   c : Class!Class
@@ -63,9 +62,8 @@ rule Class2Table {
    )),
    key <- Set {key}
   ),
-  key : Relational!Column (
-   name <- 'objectId',
-   type <- thisModule.objectIdType(thisModule.defaultType)
+  key : Relational!Type (
+   name <- 'objectId'
   )
 }
 
@@ -125,7 +123,7 @@ rule MultiValuedClassAttribute2Column {
  from
   a : Class!Attribute
   (
-   a.type.oclIsUndefined(Class!Class) and a.multiValued
+   a.type.oclIsKindOf(Class!Class) and a.multiValued
   )
  to
   t : Relational!Table (

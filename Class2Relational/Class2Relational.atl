@@ -1,3 +1,5 @@
+-- @path Class=Class.ecore
+-- @path Relational=Relational.ecore
 -- @atlcompiler emftvm
 
 module Class2Relational;
@@ -29,7 +31,7 @@ rule Package2Schema {
   p : Class!Package
  to
   s : Relational!Schema (
-  	 
+
    tables <- p.elems->select(e |
       e.oclIsKindOf(Class!Class)
     )->reject(e |
@@ -41,8 +43,8 @@ rule Package2Schema {
         a | a.multiValued
       )
   ),
-  
-  
+
+
    types <- p.elems->select(e |
     e.oclIsKindOf(Class!DataType)
    )

@@ -1,5 +1,5 @@
--- @path PNML=C:\Users\varaminz\Downloads\Project\workspaceTEST34\anatlyzer.atl.tests.api\trafo\PNML.ecore
--- @path PetriNet=C:\Users\varaminz\Downloads\Project\workspaceTEST34\anatlyzer.atl.tests.api\trafo\PetriNet.ecore
+-- @path Class=Class.ecore
+-- @path Relational=Relational.ecore
 module Class2Relational;
 create OUT : Relational from IN : Class;
 --helper context Class!NamedElt def: name : String =
@@ -29,7 +29,7 @@ rule Package2Schema {
   p : Class!Package
  to
   s : Relational!Schema (
-  	 
+
    tables <- p.elems->select(e |
       e.oclIsKindOf(Class!Class)
     )->reject(e |
@@ -41,8 +41,8 @@ rule Package2Schema {
         a | a.multiValued
       )
   ),
-  
-  
+
+
    types <- p.elems->select(e |
     e.oclIsKindOf(Class!DataType)
    )

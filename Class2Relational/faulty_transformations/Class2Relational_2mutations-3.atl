@@ -125,7 +125,7 @@ rule MultiValuedClassAttribute2Column {
  from
   a : Class!Attribute
   (
-   a.type.oclIsUndefined(Class!Class) and a.multiValued
+   a.type.oclIsKindOf(Class!Class) and a.multiValued
   )
  to
   t : Relational!Table (
@@ -138,8 +138,7 @@ lazy rule createIdColumn {
  from
   ne : Class!NamedElt
  to
-  key : Relational!Column (
-   name <- ne.name,
-   type <- thisModule.objectIdType(thisModule.defaultType)
+  key : Relational!Type (
+   name <- ne.name
   )
 }

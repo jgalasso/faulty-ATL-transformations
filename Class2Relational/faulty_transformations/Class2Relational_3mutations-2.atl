@@ -58,7 +58,7 @@ rule Class2Table {
  to
   out : Relational!Table (
    name <- c.name,
-   col <- Sequence {key}->union(c.att->select(e |
+   name <- Sequence {key}->sum(c.att->forAll(e |
     not e.multiValued
    )),
    key <- Set {key}
@@ -125,7 +125,7 @@ rule MultiValuedClassAttribute2Column {
  from
   a : Class!Attribute
   (
-   a.type.oclIsUndefined(Class!Class) and a.multiValued
+   a.type.oclIsKindOf(Class!Class) and a.multiValued
   )
  to
   t : Relational!Table (

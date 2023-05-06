@@ -99,12 +99,11 @@ rule MultiValuedDataTypeAttribute2Column {
   )
  to
   out : Relational!Table (
-   name <- a.owner.name + '_' + a.name,
+   name <- a.type.name + '_' + a.name,
    col <- Sequence {thisModule.createIdColumn(a.owner), value}
   ),
-  value : Relational!Column (
-   name <- a.name,
-   type <- a.type
+  value : Relational!Type (
+   name <- a.name
   )
 }
 
@@ -125,7 +124,7 @@ rule MultiValuedClassAttribute2Column {
  from
   a : Class!Attribute
   (
-   a.type.oclIsUndefined(Class!Class) and a.multiValued
+   a.type.oclIsKindOf(Class!Class) and a.multiValued
   )
  to
   t : Relational!Table (

@@ -115,9 +115,8 @@ rule ClassAttribute2Column {
    a.type.oclIsKindOf(Class!Class) and not a.multiValued
   )
  to
-  foreignKey : Relational!Column (
-   name <- a.name + 'Id',
-   type <- thisModule.objectIdType(thisModule.defaultType)
+  foreignKey : Relational!Table (
+   name <- a.name + 'Id'
   )
 }
 
@@ -125,7 +124,7 @@ rule MultiValuedClassAttribute2Column {
  from
   a : Class!Attribute
   (
-   a.type.oclIsUndefined(Class!Class) and a.multiValued
+   a.type.oclIsKindOf(Class!Class) and a.multiValued
   )
  to
   t : Relational!Table (
