@@ -1,5 +1,5 @@
--- @path SimpleUml=/example.tracts/uml2er/metamodels/SimpleUml.ecore
--- @path ER=/example.tracts/uml2er/metamodels/ER.ecore
+-- @path SimpleUml=SimpleUml.ecore
+-- @path ER=ER.ecore
 -- @atlcompiler emftvm
 module SimpleUml2ER;
 create OUT : ER from IN : SimpleUml;
@@ -19,7 +19,7 @@ rule Package extends NamedElement {
 from
 s : SimpleUml!Package
 to
-t : ER!ERModel 
+t : ER!ERModel
 }
 
 rule Class extends NamedElement {
