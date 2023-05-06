@@ -1,5 +1,5 @@
--- @path BibTeX=examples/class2rel/metamodels/BibTeX.ecore
--- @path DocBook=examples/class2rel/metamodels/DocBook.ecore
+-- @path BibTeX=BibTeX.ecore
+-- @path DocBook=DocBook.ecore
 -- @atlcompiler emftvm
 module BibTeX2DocBook;
 create OUT : DocBook from IN : BibTeX;
