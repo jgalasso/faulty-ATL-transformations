@@ -9,13 +9,3 @@ Each directory provides:
  - 4 test cases in the form of input/output models
  - mutated versions of the correct transformation
 
-### TO DO
-- [x] UML2ER
-
-- [ ] Class2Relational
-
-- [ ] Bibtex2DocBook
-
-- [ ] PNML2PEtrinet
-
-https://github.com/zahravaraminy/RepairingATLSemanticErrors-SocialDiversity/tree/main/FixingATLErrorSocialDiversityCrowdingDistance/Experiment-SocialDiversityCrowdingDistance
