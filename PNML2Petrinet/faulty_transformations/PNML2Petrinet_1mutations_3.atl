@@ -1,6 +1,5 @@
 -- @path PNML=PNML.ecore
 -- @path PetriNet=PetriNet.ecore
--- @atlcompiler emftvm
 module PNML2PetriNet;
 create OUT : PetriNet from IN : PNML;
 
@@ -13,7 +12,6 @@ rule PetriNet {
   arcsSet : Sequence(PNML!Arc) = PNML!Arc.allInstances()->select(a |
    a.source.oclIsKindOf(PNML!Place) and a.target.oclIsKindOf(PNML!Transition) or a.source.oclIsKindOf(PNML!Transition) and a.target.oclIsKindOf(PNML!Place)
   );
-
  }
  to
   p : PetriNet!PetriNet (
@@ -62,7 +60,6 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-
    n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
@@ -83,7 +80,6 @@ rule TransitionToPlace {
  from
   n : PNML!Arc
   (
-
    n.source.oclIsKindOf(PNML!Transition) and n.target.oclIsKindOf(PNML!Place)
   )
  to
@@ -96,6 +92,6 @@ rule TransitionToPlace {
    endif,
    net <- n.net.document,
    from <- n.source,
-   to <- n.target
+   to <- n.net
   )
 }
