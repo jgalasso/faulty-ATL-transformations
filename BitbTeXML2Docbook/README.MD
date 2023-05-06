@@ -2,9 +2,9 @@
 
 [Link - ATL Zoo](https://www.eclipse.org/atl/atlTransformations/#BibTeXML2DocBook)
 
-Original valid transformation: ``BibTeXML2DocBook.atl``
-Input metamodel: ``BibTeX.ecore``
-Output metamode: ``DocBook.ecore``
+Original valid transformation: ``BibTeXML2DocBook.atl``  
+Input metamodel: ``BibTeX.ecore``  
+Output metamodel: ``DocBook.ecore``  
 
 * ``input_models/`` contains 4 models conforming to ``BibTeX.ecore`` in XMI format
 * ``expected_output_models/`` contains 4 models conforming to ``DocBook.ecore`` in XMI format. They correspond to the models obtained after applying the orginal valid transformation on the input models.
