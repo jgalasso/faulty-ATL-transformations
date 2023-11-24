@@ -9,7 +9,7 @@ rule PetriNet {
  using
  {
   elementsSet : Sequence(PNML!NetContentElement) = PNML!NetContentElement.allInstances();
-  arcsSet : Sequence(PNML!Arc) = PNML!Arc.allInstances()->select(a |
+  arcsSet : Sequence(PNML!IdedElement) = PNML!Arc.allInstances()->select(a |
    a.source.oclIsKindOf(PNML!Place) and a.target.oclIsKindOf(PNML!Transition) or a.source.oclIsKindOf(PNML!Transition) and a.target.oclIsKindOf(PNML!Place)
   );
  }
@@ -60,7 +60,7 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
@@ -95,3 +95,12 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Argument Type Modification" from oclIsKindOf:URI to oclIsKindOf:LocatedElement (line 83:46-83:76 of original transformation)
+
+
+-- MUTATION "Navigation Modification" from n.net to n.target (line 95:10-95:15 of original transformation)
+
+
+-- MUTATION "Argument Type Modification" from oclIsKindOf:LocatedElement to oclIsKindOf:Place (line 83:46-83:76 of original transformation)
+

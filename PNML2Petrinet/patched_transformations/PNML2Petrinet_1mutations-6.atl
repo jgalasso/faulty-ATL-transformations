@@ -60,11 +60,10 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
-   location <- n.location,
    name <- if not n.name.oclIsUndefined() then
     n.name.labels->first().text
    else
@@ -72,7 +71,8 @@ rule PlaceToTransition {
    endif,
    net <- n.net.document,
    from <- n.source,
-   to <- n.target
+   to <- n.target,
+   location <- n.location
   )
 }
 
@@ -95,3 +95,6 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Argument Type Modification" from oclIsKindOf:URI to oclIsKindOf:Transition (line 83:4-83:34 of original transformation)
+

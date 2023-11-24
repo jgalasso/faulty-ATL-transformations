@@ -47,12 +47,8 @@ rule Transition {
  to
   p : PetriNet!Transition (
    location <- n.location,
-   name <- if not n.name.oclIsUndefined() then
-    n.name.labels->first().text
-   else
-    'default'
-   endif,
-   net <- n.net.document
+   net <- n.net.document,
+   name <- 'dummy'
   )
 }
 
@@ -60,7 +56,7 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
@@ -72,7 +68,7 @@ rule PlaceToTransition {
    endif,
    net <- n.net.document,
    from <- n.source,
-   to <- n.target
+   to <- n.net
   )
 }
 
@@ -80,7 +76,7 @@ rule TransitionToPlace {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!Transition) and n.target.oclIsKindOf(PNML!Place)
+   n.source.oclIsKindOf(PNML!Arc) and n.target.oclIsKindOf(PNML!Place)
   )
  to
   p : PetriNet!TransitionToPlace (
@@ -95,3 +91,6 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Navigation Modification" from n.target to n.net (line 71:10-71:18 of original transformation)
+

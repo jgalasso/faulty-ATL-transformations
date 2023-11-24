@@ -60,7 +60,7 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
@@ -72,7 +72,8 @@ rule PlaceToTransition {
    endif,
    net <- n.net.document,
    from <- n.source,
-   to <- n.target
+   to <- n.target,
+   name <- n.id
   )
 }
 
@@ -95,3 +96,9 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Binding-target Modification" from weight to name (line 68:4-72:9 of original transformation)
+
+
+-- MUTATION "Navigation Modification" from n.location to n.id (line 76:12-76:22 of original transformation)
+

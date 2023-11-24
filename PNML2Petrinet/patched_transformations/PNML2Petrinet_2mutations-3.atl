@@ -9,7 +9,7 @@ rule PetriNet {
  using
  {
   elementsSet : Sequence(PNML!NetContentElement) = PNML!NetContentElement.allInstances();
-  arcsSet : Sequence(PNML!Arc) = PNML!Arc.allInstances()->select(a |
+  arcsSet : Sequence(PNML!IdedElement) = PNML!Arc.allInstances()->select(a |
    a.source.oclIsKindOf(PNML!Place) and a.target.oclIsKindOf(PNML!Transition) or a.source.oclIsKindOf(PNML!Transition) and a.target.oclIsKindOf(PNML!Place)
   );
  }
@@ -17,7 +17,7 @@ rule PetriNet {
   p : PetriNet!PetriNet (
    location <- n.location,
    name <- if not n.nets->first().name.oclIsUndefined() then
-    n.nets->first().name.labels->first().text
+    n.nets->first().name.labels->last().text
    else
     'aPetriNet'
    endif,
@@ -60,7 +60,7 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
@@ -72,7 +72,8 @@ rule PlaceToTransition {
    endif,
    net <- n.net.document,
    from <- n.source,
-   to <- n.target
+   to <- n.target,
+   location <- n.location
   )
 }
 
@@ -95,3 +96,15 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Binding-target Modification" from weight to location (line 67:4-67:24 of original transformation)
+
+
+-- MUTATION "Argument Type Modification" from oclIsKindOf:URI to oclIsKindOf:Place (line 84:46-84:76 of original transformation)
+
+
+-- MUTATION "Iterator Modification" from reject to select (line 12:42-14:4 of original transformation)
+
+
+-- MUTATION "Collection Operation Call Modification" from first to last (line 20:5-20:41 of original transformation)
+

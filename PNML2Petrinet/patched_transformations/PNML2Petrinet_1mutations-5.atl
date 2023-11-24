@@ -60,7 +60,7 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
@@ -95,3 +95,6 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Argument Type Modification" from oclIsKindOf:URI to oclIsKindOf:Transition (line 83:4-83:34 of original transformation)
+

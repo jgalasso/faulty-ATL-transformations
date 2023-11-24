@@ -8,7 +8,7 @@ rule PetriNet {
   n : PNML!PNMLDocument
  using
  {
-  elementsSet : Sequence(PNML!NetContentElement) = PNML!NetContentElement.allInstances();
+  elementsSet : Sequence(PNML!IdedElement) = PNML!NetContentElement.allInstances();
   arcsSet : Sequence(PNML!Arc) = PNML!Arc.allInstances()->select(a |
    a.source.oclIsKindOf(PNML!Place) and a.target.oclIsKindOf(PNML!Transition) or a.source.oclIsKindOf(PNML!Transition) and a.target.oclIsKindOf(PNML!Place)
   );
@@ -32,12 +32,8 @@ rule Place {
  to
   p : PetriNet!Place (
    location <- n.location,
-   name <- if not n.name.oclIsUndefined() then
-    n.name.labels->first().text
-   else
-    'default'
-   endif,
-   net <- n.net.document
+   net <- n.net.document,
+   name <- n.id
   )
 }
 
@@ -60,13 +56,13 @@ rule PlaceToTransition {
  from
   n : PNML!Arc
   (
-   n.source.oclIsKindOf(PNML!URI) and n.target.oclIsKindOf(PNML!Transition)
+   n.source.oclIsKindOf(PNML!Place) and n.target.oclIsKindOf(PNML!Transition)
   )
  to
   p : PetriNet!PlaceToTransition (
    location <- n.location,
    name <- if not n.name.oclIsUndefined() then
-    n.name.labels->first().text
+    n.name.labels->last().text
    else
     'default'
    endif,
@@ -95,3 +91,9 @@ rule TransitionToPlace {
    to <- n.target
   )
 }
+
+-- MUTATION "Collection Operation Call Modification" from first to last (line 65:5-65:27 of original transformation)
+
+
+-- MUTATION "Navigation Modification" from n.location to n.id (line 36:12-36:22 of original transformation)
+

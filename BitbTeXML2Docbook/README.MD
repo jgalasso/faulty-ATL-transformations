@@ -9,3 +9,4 @@ Output metamodel: ``DocBook.ecore``
 * ``input_models/`` contains 4 models conforming to ``BibTeX.ecore`` in XMI format
 * ``expected_output_models/`` contains 4 models conforming to ``DocBook.ecore`` in XMI format. They correspond to the models obtained after applying the orginal valid transformation on the input models.
 * ``faulty_transformations/`` contains 20 versions of the original valid transformation in which 2 to 5 mutations were applied.
+* ``patched_transformations/`` contains examples of patched transformations.
